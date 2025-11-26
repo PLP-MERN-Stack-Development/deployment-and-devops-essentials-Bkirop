@@ -1,28 +1,31 @@
 
 
 // client/src/App.jsx
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { Layout } from './components/layout/Layout';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { Loading } from './components/common/Loading';
 
-// Pages
-import { Home } from './pages/Home';
-import { CreatePost } from './pages/CreatePost';
-import { EditPost } from './pages/EditPost';
-import { PostPage } from './pages/PostPage';
-import { LoginPage } from './pages/LoginPage';
-import { RegisterPage } from './pages/RegisterPage';
-import { ForgotPassword } from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
-import { NotFound } from './pages/NotFound';
-import About from './pages/About';
+// Lazy load Pages
+const Home = React.lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
+const CreatePost = React.lazy(() => import('./pages/CreatePost').then(module => ({ default: module.CreatePost })));
+const EditPost = React.lazy(() => import('./pages/EditPost').then(module => ({ default: module.EditPost })));
+const PostPage = React.lazy(() => import('./pages/PostPage').then(module => ({ default: module.PostPage })));
+const LoginPage = React.lazy(() => import('./pages/LoginPage').then(module => ({ default: module.LoginPage })));
+const RegisterPage = React.lazy(() => import('./pages/RegisterPage').then(module => ({ default: module.RegisterPage })));
+const ForgotPassword = React.lazy(() => import('./pages/ForgotPassword').then(module => ({ default: module.ForgotPassword })));
+const ResetPassword = React.lazy(() => import('./pages/ResetPassword'));
+const NotFound = React.lazy(() => import('./pages/NotFound').then(module => ({ default: module.NotFound })));
+const About = React.lazy(() => import('./pages/About'));
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <Routes>
+        <Suspense fallback={<Loading />}>
+          <Routes>
           <Route path="/" element={<Layout />}>
             {/* Public Routes */}
             <Route index element={<Home />} />

@@ -2,15 +2,23 @@
 
 // Import required modules
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const winston = require('winston');
+
+// Import database connection
+const connectDB = require('./src/config/database');
 
 // Import routes
 const postRoutes = require('./routes/posts');
 const categoryRoutes = require('./routes/categories');
 const authRoutes = require('./routes/auth');
+
+// Import middleware
+const errorHandler = require('./src/middleware/errorHandler');
 
 // Load environment variables
 dotenv.config();
