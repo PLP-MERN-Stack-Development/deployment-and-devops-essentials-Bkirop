@@ -2,6 +2,11 @@
 
 A full-stack blog application built with MongoDB, Express.js, React.js, and Node.js. Features include user authentication, CRUD operations for blog posts, categories, search functionality, pagination, comments, and password reset functionality.
 
+## 🚀 Live Demo
+
+[View Live Application](https://blogapp-p3g08g1y9-brian-kirops-projects.vercel.app/)
+
+
 ## 🌟 Features
 
 ### Core Features

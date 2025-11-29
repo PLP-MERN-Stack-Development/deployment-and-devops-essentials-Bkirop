@@ -5,6 +5,11 @@ const { sendPasswordResetEmail } = require('../config/email');
 
 // Generate JWT Token
 const generateToken = (id) => {
+  console.log('Generating JWT token for user ID:', id);
+  console.log('JWT_SECRET available:', !!process.env.JWT_SECRET);
+  if (!process.env.JWT_SECRET) {
+    console.error('JWT_SECRET is not defined in environment variables');
+  }
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: '30d'
   });
